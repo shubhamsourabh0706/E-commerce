@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <title>Motu Store  {% block title %} {% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="home">
+            <img src="{% static 'images/logo1.jpg' %}" width="100">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex flex-grow-1 mx-5 form">
+                <input class="form-control me-2 input" type="search" placeholder="Search for Products, Brand and More" aria-label="Search">
+                <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            {% if not request.user.is_authenticated %}
+
+            <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa-regular fa-bell"></i>
+                        Notifications
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                
+                <li class="nav-item dropdown" id="hoverDropdown">
+                    <a class="nav-link dropdown-toggle bg-dark text-white rounded login" href="#" role="button" aria-expanded="false">
+                        
+                        Login
+                    </a>
+                    <ul class="dropdown-menu shadow dropdown-menu-end mt-1" aria-labelledby="hoverDropdown" style="margin-left: -20px;">
+                      <li><a class="dropdown-item" href="create_account"><i class="fa-solid fa-user-plus"></i> Sign-Up</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="user_login"><i class="fa-solid fa-users"></i> Customer</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="admin_login"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                  </ul>
+                </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a href="" class="nav-link">
+                          <i class="fa-solid fa-cart-shopping"></i>
+                          <sup class="cart-count">{{ total_product }}</sup>
+                          
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="" class="nav-link">
+                          <i class="fa-regular fa-bell"></i>
+                          Notifications
+                      </a>
+                  </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown" id="hoverDropdown">
+                    <a class="nav-link dropdown-toggle bg-black text-white rounded-pill text-center user" href="#" role="button" aria-expanded="false">
+                        {{ request.user.first_name.0 }} {{ request.user.last_name.0 }}
+                    </a>
+                    
+                    <ul class="dropdown-menu shadow dropdown-menu-end mt-1" aria-labelledby="hoverDropdown" style="margin-left: -50px;">
+                        <li><a class="dropdown-item" href="user_profile"><i class="fa-regular fa-address-card"></i> Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="orders"><i class="fa-solid fa-bag-shopping"></i> My Order</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="change_password"><i class="fa-solid fa-key"></i> Change Password</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="feedback"><i class="fa-solid fa-comments"></i> Feedback</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="logout_user"><i class="fa-solid fa-lock"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+                
+            
+            {% endif %}
+        </div>
+        
+    </div>
+</nav>
+
+  {% block category %}
+  <div class="container bg-body-tertiary mt-5 mb-4 shadow">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 gx-3 gy-3">
+        {% for d in data %}
+        <div class="col">
+            <div class="card border-0 h-100 mb-2">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <img src="/media/{{ d.images }}" class="card-img-top rounded-3 mb-3" alt="{{ d.name }}" style="width: 4rem;">
+                    <h5 class="card-title fs-6 text-center">{{ d.name }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+  {% endblock %}
+
+  {% block banner_slider %}
+
+  <div class="mx-4 mt-3 mb-3 shadow">
+    <div class="row">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          {% for i in carsouel %}
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter}}" {% if forloop.counter == 1 %}class="active" {% endif %} aria-current="true"
+            aria-label="Slide {{forloop.counter}}"></button>
+          {% endfor %}
+        </div>
+        <div class="carousel-inner">
+          {% for i in carsouel %}
+          <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} ">
+            <img src="/media/{{i.images}}" class="d-block w-100" alt="...">
+          </div>
+          {% endfor %}
+
+        </div>
+        <button class="carousel-control-prev  " type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon fs-5  py-5 px-3" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon py-5 px-3" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {% endblock banner_slider %}
+
+  {% block main-content %}
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4 "> Deals of The Day</h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow " id="slider1">
+      {% for i in mobile %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow ">
+        <div class="item mt-2 mb-2">
+          <img src="/media/{{i.images}}" alt="" height="220" style="width: 150px;" class="mx-5 mb-3 image-zoom">
+          <span class="fw-bold text-success fs-6 ">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-5">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4"> Popular Products</h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow" id="slider1">
+      {% for i in fashion %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow">
+        <div class="item">
+          <img src="/media/{{i.images}}" alt="" height="220" style="width: 150px;" class="mx-5 mb-3 image-zoom">
+          <span class="fw-bold text-success fs-6">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-5">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4"> Best of Electronics</h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow" id="slider1">
+      {% for i in ele %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow">
+        <div class="item">
+          <img src="/media/{{i.images}}" alt="" height="200" style="width: 120px;" class="mx-5 mb-3 image-zoom ">
+          <span class="fw-bold text-success fs-6 ">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-5">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4"> Best of Grocery </h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow" id="slider1">
+      {% for i in grocery %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow">
+        <div class="item">
+          <img src="/media/{{i.images}}" alt="" height="220" style="width: 150px;" class="mx-5 mb-3 image-zoom">
+          <span class="fw-bold text-success fs-6 ">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-5">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4"> Heavy Discount in Appliances</h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow" id="slider1">
+      {% for i in app %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow">
+        <div class="item">
+          <img src="/media/{{i.images}}" alt="" style="width: 180px; height: 150px;" class="mx-5 mb-3 image-zoom">
+          <span class="fw-bold text-success fs-6 ">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-5">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="m-3 bg-body-tertiary shadow">
+    <h4 class="mx-3 mt-4"> Deals of The Day</h4>
+    <!-- Slider 1 -->
+    <div class="owl-carousel owl-theme shadow" id="slider1">
+      {% for i in fur %}
+      <a href="product_detail?id={{i.id}}" class="btn shadow">
+        <div class="item">
+          <img src="/media/{{i.images}}" alt="" height="220" style="width: 150px;" class="mx-5 mb-3 image-zoom">
+          <span class="fw-bold text-success mx-2 fs-5">{{ i.title|slice:":20" }}...</span>
+          <br>
+          <span class="fs-6">Rs. {{i.dicounted_price}}</span>
+        </div>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  {% endblock main-content %}
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+
+  <script src="{% static 'js/myscript.js' %}"></script>
+
+
+</body>
+
+</html>

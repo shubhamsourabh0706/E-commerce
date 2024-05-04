@@ -1,0 +1,69 @@
+{% extends 'admin_dashboard.html' %}
+{% block body  %}
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">View Feedback</h5>
+        <div class="container">
+            
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">SR No.</th>
+                        <th scope="col" class="text-center">User</th>
+                        <th scope="col" class="text-center">Subject</th>
+                        <th scope="col" class="text-center">Comment</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in feedback %}
+                    <tr>
+                        <td scope="col" class="text-center">{{forloop.counter}}</td>
+                        <td scope="col" class="text-center">{{i.user.first_name}} {{i.user.last_name}}</td>
+                        <td scope="col" class="text-center">{{i.subject}} </td>
+                        <td scope="col" class="text-center"><!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-{{forloop.counter}}">
+                              View Comment
+                            </button>
+                            <!-- Modal -->
+                        <div class="modal fade" id="exampleModal-{{forloop.counter}}" onblur="changeStatus('{{i.id}}', '{{forloop.counter}}', '{{i.status}}')" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">{{i.user.first_name}} {{i.user.last_name}}'s Feedback</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="changeStatus('{{i.id}}', '{{forloop.counter}}', '{{i.status}}')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{i.message}}
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="changeStatus('{{i.id}}', '{{forloop.counter}}', '{{i.status}}')">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td scope="col" class="text-center"><a href="delete_feedback?id={{i.id}}">
+                            <i class="fas fa-trash text-danger"></i>
+                        </a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<script>
+    function changeStatus(pid, count, status_id){
+        url = '/feedback-read/'+pid+'/';
+        $.get(url, function(data, status){
+            if(status_id == '2'){
+                document.getElementById('row-'+count).style.display = 'none';
+            }
+        })
+    }
+</script>
+{% endblock %}

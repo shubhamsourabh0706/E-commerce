@@ -1,0 +1,46 @@
+{% extends 'home.html' %}
+{% block title %}Admin-Login{% endblock %}
+{% load static %}
+
+<body id="login">
+    {% block main-content %}
+    <hr class="mt-0">
+    <div class="row">
+        <div class="col-lg-5 m-auto  " >
+            <div class="card  mt-5 bg-dark" style="border: none; border-radius: 10px;">
+                <div class="card-title text-center mt-3">
+                    <img src="{% static 'images/user.jpg' %}" width="150" height="150"  style="border-radius: 50%;">
+                    <h2 class="text-white mt-2">Admin Login</h2>
+                    <h4 class="text-danger mt-2">{{msg}}</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="admin_data">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">
+                                <i class="fa fa-user fa-2x"></i>
+                            </span>
+
+                            <input type="text" name="username" class="form-control " placeholder="UserName">
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">
+                                <i class="fa fa-lock fa-2x"></i>
+                            </span>
+
+                            <input type="password" name="password" class="form-control py-2" placeholder="Password">
+                        </div>
+                        <input type="submit" value="Login" class="btn btn-success px-5">
+                        <a href="home" class="float-end mt-2 text-white text-decoration-none ">
+                            <i class="fa fa-angle-double-left"></i> 
+                            Go Back To
+                            HomePage </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock main-content %}
+</body>

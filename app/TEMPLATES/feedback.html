@@ -1,0 +1,40 @@
+{% extends 'home.html'%}
+{% block title %} | Change-Password{% endblock %}
+{% block main-content %}
+<div class="container m-auto px-2 px-md-5 "> <!-- Adjusted padding for different screen sizes -->
+    <div class="card shadow-lg m-3 m-md-5">
+        <div class="card-body">
+            <div class="container">
+                <h5 class="p-2 text-center fs-4" style="border-bottom: 2px solid orange;color:green">Feedback Form</h5>
+                <h6 class="p-2 text-center fs-4 text-danger">{{msg}}</h6>
+
+                <form action="feedback_data" method="POST">
+                    {% csrf_token %}
+                    <div class="row justify-content-center ">
+                        <div class="col-12 col-md-6"> <!-- Adjusted column width for different screen sizes -->
+                            <div class="form-group mb-3 mt-2 shadow">
+                                <input type="email" name="email" value="{{ request.user.username }}" class="form-control" readonly placeholder="Enter email">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6"> <!-- Adjusted column width for different screen sizes -->
+                            <div class="form-group mb-3 mt-2 shadow">
+                                <input type="text" name="sub" class="form-control" placeholder="Subject" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3 mt-2 shadow">
+                                <textarea type="text" name="msg" class="form-control" placeholder="Write Your Feedback" required></textarea>
+                                <label for="floatingTextarea">Enter Your Feedback</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center"> <!-- Center the submit button -->
+                        <input type="submit" value="Submit" class="btn btn-success px-4 px-md-5"> <!-- Adjusted padding for different screen sizes -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

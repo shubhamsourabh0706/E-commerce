@@ -1,0 +1,94 @@
+{% extends 'home.html'%}
+{% block title %} | Profile {% endblock %}
+{% block main-content %}
+<div class="container m-auto px-5 w-60">
+    <div class="card shadow-lg m-5">
+        <div class="card-body">
+            <div class="container">
+                <h5 class="p-2 text-center fs-4" style="border-bottom: 2px solid orange;color:green">Update Your Detail
+                </h5>
+                <div class="row">
+                <div class="col-sm-2 border-end shadow mt-2">
+                    <ul class="list-unstyled mt-3">
+                     <li class="d-grid shadow"><a href="user_profile" class="btn   ">Profile</a></li>
+                     <li class="d-grid shadow"><a href="update_profile" class="btn btn-primary mt-3 ">Address</a></li>
+                    </ul>
+                   </div>
+                   <div class="col-sm-9 offset-sm-1">
+                <form action="profile_data" method="POST">
+                    {% csrf_token %}
+                    <div class="row justify-content-center ">
+                        <div class="col-sm-6 col-lg-12">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <input type="text" name="name" placeholder="Enter Your Name" class="form-control"
+                                    >
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-12">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <input type="tel" name="phone" placeholder="Contact Number" class="form-control"
+                                    >
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 col-lg-12">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <input type="text" name="locality" placeholder="Locality" required class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-sm-6 col-lg-12 ">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <input type="text" name="city" placeholder="City" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-12 ">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <select name="state" class="form-control" required>
+                                    <option value="">Choose State</option>
+                                    {% for i in state %}
+
+                                    <option value="{{i.0}}">{{i.1}}</option>
+
+                                    {% endfor %}
+                                </select>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-12 ">
+                            <div class="form-group mb-3 mt-2 shadow">
+
+                                <input type="text" name="pincode" placeholder="Zipcode" class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-success px-5">
+                        <a href="home" class="float-end mt-2  text-decoration-none text-dark">
+                            <i class="fa fa-angle-double-left fs-3"></i> 
+                             </a>
+                </form>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}Order{% endblock title %}
+{% block main-content %}
+<style>
+    /* Add custom CSS styles */
+
+
+</style>
+<div class="container my-5">
+    <div class="row">
+        <h3>Welcome <span style="text-transform: capitalize;">{{ request.user.first_name }}</span></h3>
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'orders' %}" class="btn btn-primary">Orders</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 offset-sm-1">
+            {% for i in order %}
+            <div class="row shadow mb-4">
+                <div class="col-sm-2">
+                    <img src="/media/{{ i.product.images }}" alt="" class="img-fluid rounded mt-2" height="150" width="150">
+                </div>
+                <div class="col-sm-7 order-details">
+                    <div class="order-info">
+                        <p class="fw-bold product-title">{{ i.product.title }}</p>
+                        <p class="quantity">Quantity: {{ i.quantity }}</p>
+                        <p class="price">Price: {{ i.totalCost }}</p>
+                        <p class="order-no">Order No: {{ i.orderNo }}</p>
+                        <p class="order-date">Order Date: {{ i.created }}</p>
+                        {% if i.status != 6 %}
+                            {% if i.delivery_date %}
+                                <p class="delivery-date">Delivery Date: {{ i.delivery_date }}</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="status-container mt-3">
+                        <p class="fw-bold">Order Status: {{ i.get_status_display }}</p>
+                        {% if i.status == 2 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-dark" role="progressbar" style="width: 20%;" aria-valuenow="20"></div>
+                        </div>
+                        {% elif i.status == 1 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-dark" role="progressbar" style="width: 0%;"></div>
+                        </div>
+                        <a href="cancel_product?id={{i.id}}" class="btn btn-danger mt-2">Cancel</a>
+                        {% elif i.status == 3 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%;"></div>
+                        </div>
+                        {% elif i.status == 4 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;"></div>
+                        </div>
+                        {% elif i.status == 5 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;"></div>
+                        </div>
+                        <a href="return_product?id={{i.id}}" class="btn btn-success mt-2">Return</a>
+                        {% elif i.status == 6 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;"></div>
+                        </div>
+                        <p class="return-info mt-2">Your order has been cancelled and amount will be refunded shortly.</p>
+                        {% elif i.status == 7 %}
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;"></div>
+                        </div>
+                        <p class="return-info mt-2">Your product will be returned within 48 hours, and the amount will be refunded to the same account.</p>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

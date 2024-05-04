@@ -1,0 +1,72 @@
+{% extends 'home.html' %}
+{% block title %}Cart{% endblock %}
+{% load static %}
+{% block main-content %}
+<div class="container my-5 shadow">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-3 mb-5">Shopping Cart</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="mb-4"></h3>
+                    {% for item in cart %}
+                    <div class="row mb-4 border-bottom pb-4">
+                        <div class="col-md-3 text-center align-self-center">
+                            <img src="/media/{{ item.product.images }}" alt="{{ item.product.title }}" class="img-fluid img-thumbnail shadow-sm" height="150" width="150">
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <h5>{{ item.product.title }}</h5>
+                                <p class="mb-2 text-muted small">{{ item.product.description }}</p>
+                                <div class="d-flex align-items-center">
+                                    <label for="quantity" class="me-3">Quantity:</label>
+                                    <div class="btn-group">
+                                        <button class="btn minus-cart" pid="{{item.product.id}}"><i class="fas fa-minus-square fa-lg"></i></button>
+                                        <span id="quantity" class="btn btn-outline-secondary">{{ item.quantity }}</span>
+                                        <button class="btn plus-cart" pid = "{{item.product.id}}"><i class="fas fa-plus-square fa-lg"></i></button>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button class="btn btn-sm btn-outline-secondary remove-cart" pid="{{item.product.id}}">Remove item</button>
+                                    <p class="mb-0"><strong>{{item.product.dicounted_price}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="mb-4">Total Amount</h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">Amount<span class="badge bg-secondary">Rs. <span id="amount">{{amount}}</span></span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">Shipping<span class="badge bg-secondary">Rs. {{shipping_amount}}</span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">Total<span class="badge bg-primary">Rs. <span id="totalamount">{{totalAmount}}</span></span></li>
+                    </ul>
+                    <div class="d-grid">
+                        <a href="check_out" class="btn btn-primary">Place Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="mb-4">We accept</h5>
+                    <img src="{% static 'images/payment.jpg' %}" alt="Accepted Payment Methods" class="img-fluid" style="width: 50%; ">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

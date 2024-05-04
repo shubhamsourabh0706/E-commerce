@@ -1,0 +1,42 @@
+{% extends 'home.html' %}
+{% block title %}Product-Page{% endblock %}
+{% load static %}
+{% block main-content %}
+<div class="container my-5 bg-light p-4 rounded shadow">
+    <div class="row">
+        <div class="col-lg-6 text-center">
+            <img src="/media/{{product.images}}" alt="" class="img-fluid img-thumbnail my-5 rounded">
+        </div>
+        <div class="col-lg-6 mt-4 mb-4">
+            <h2 class="text-primary">{{product.title}}</h2>
+            <hr>
+            <p class="lead">{{product.description}}</p>
+            <div class="price-section">
+                <h4 class="text-success">Rs. {{product.dicounted_price}} <small class="text-muted text-decoration-line-through ms-2">{{product.selling_price}}</small></h4>
+                <div class="btn-group mt-4" role="group">
+                    {% if request.user.is_authenticated %}
+                    {% if product_is_in_cart %}
+                    <a href="show-cart?id={{product.id}}" class="btn btn-warning shadow-lg px-4 py-2">Show Cart</a>
+                    {% else %}
+                    <a href="add_to_cart?id={{product.id}}" class="btn btn-primary shadow-lg px-4 py-2 cart">Add to Cart</a>
+                    {% endif %}
+                    {% else %}
+                    <a href="add_to_cart?id={{product.id}}" class="btn btn-primary shadow-lg px-4 py-2">Add to Cart</a>
+                    {% endif %}
+                    <a href="show-cart?id={{product.id}}" class="btn btn-danger shadow-lg px-4 py-2 ms-3">Buy Now</a>
+                </div>
+            </div>
+            <div class="offers-section mt-5">
+                <h5 class="text-primary">Available Offers</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-coins text-warning me-2"></i> Bank Offer: 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
+                    <li><i class="fas fa-tags text-warning me-2"></i> Special Price: Get extra ₹3000 off (price inclusive of discount)</li>
+                    <li><i class="fas fa-credit-card text-warning me-2"></i> No Cost EMI: ₹1,667/month. Standard EMI also available</li>
+                    <li><i class="fas fa-gift text-warning me-2"></i> Partner Offer: ₹2000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit Card</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

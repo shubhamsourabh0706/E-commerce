@@ -1,0 +1,54 @@
+{% extends 'admin_dashboard.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 shadow">
+            <h5 class="p-2 text-center text-white display-4 font-weight-bold font-italic" style="border-bottom: 2px solid orange;"> Category-Detail</h5>
+            <table class="table table-success table-hover table-bordered shadow mt-4 px-3 mb-3">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Sr No.</th>
+                        <th scope="col" class="text-center">Image</th>
+                        <th scope="col" class="text-center"> Category</th>
+                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-center">Selling Price</th>
+                        <th scope="col" class="text-center">Discounted Price</th>
+                        <th scope="col" class="text-center">Brand</th>
+                        
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Creation Date</th>
+                        <th scope="col" class="text-center">Update Date</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                    <tr>
+                        <td scope="col" class="text-center">{{forloop.counter}}</td>
+                        <td class="text-center"><img src="/media/{{d.images}}" width="50px" height="50px"
+                            class="image-fluid rounded"></td>
+                        <td scope="col" class="text-center">{{d.category}}</td>
+                        <td scope="col" class="text-center">{{d.title}}</td>
+                        <td scope="col" class="text-center">{{d.selling_price}}</td>
+                        <td scope="col" class="text-center">{{d.dicounted_price}}</td>
+                        <td scope="col" class="text-center">{{d.brand}}</td>
+                        
+                        <td scope="col" class="text-center">{{d.description}}</td>
+                        <td scope="col" class="text-center">{{d.created}}</td>
+                        <td scope="col" class="text-center">{{d.updated}}</td>
+                        <td scope="col" class="text-center">
+                            <a href="edit_product?id={{d.id}}" class="">
+                                <i class="fas fa-edit text-success me-2 display-5"></i></a>
+                            <a href="del_product?id={{d.id}}">
+                                <i class="fas fa-trash text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

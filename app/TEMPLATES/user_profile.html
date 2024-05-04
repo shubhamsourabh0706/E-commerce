@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+{% block title %} | Profile {% endblock %}
+{% block main-content %}
+<div class="container m-auto px-5 w-80">
+    <div class="card shadow-lg m-5">
+        <div class="card-body">
+            <div class="container">
+                <h5 class="p-2 text-center fs-4" style="border-bottom: 2px solid orange;color:green">Welcome {{request.user.first_name }} {{ request.user.last_name}}
+                </h5>
+                <div class="row">
+                <div class="col-sm-2 border-end shadow mt-2">
+                    <ul class="list-unstyled mt-3">
+                     <li class="d-grid shadow"><a href="user_profile" class="btn {{active}} ">Profile</a></li>
+                     <li class="d-grid shadow"><a href="update_profile" class="btn mt-3 ">Address</a></li>
+                    </ul>
+                   </div>
+                <div class="col-sm-9 offset-sm-1">
+                    <div class="row">
+                        {% for d in profile %}
+                        <div class="col-sm-6">
+                            <div class="card shadow mt-2 mb-2">
+                                <div class="card-body shadow " style="background-color: #f8f9fa; border-radius: 10px; padding: 20px;">
+                                    <h3 class="text-center" style="color: #007bff;">ADDRESS {{ forloop.counter }}</h3>
+                                    <hr style="border-top: 2px solid #007bff;">
+                                    <p style="font-size: 18px;">Name: <span style="color: #6c757d;">{{ d.name }}</span></p>
+                                    <p style="font-size: 18px;">Contact No: <span style="color: #6c757d;">{{ d.contact }}</span></p>
+                                    <p style="font-size: 18px;">Locality: <span style="color: #6c757d;">{{ d.locality }}</span></p>
+                                    <p style="font-size: 18px;">City: <span style="color: #6c757d;">{{ d.cities }}</span></p>
+                                    <p style="font-size: 18px;">State: <span style="color: #6c757d;">{{ d.state }}</span></p>
+                                    <p style="font-size: 18px;">Zipcode: <span style="color: #6c757d;">{{ d.zipcode }}</span></p>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    {% endblock %}

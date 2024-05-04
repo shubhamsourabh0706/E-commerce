@@ -1,0 +1,271 @@
+.owl-carousel .item {
+  /* border: 1px solid black; */
+  font-size: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.owl-next {
+  float: right;
+}
+.owl-prev {
+  float: left;
+}
+.owl-prev span {
+  font-size: 18px;
+  font-weight: bold;
+}
+.owl-next span {
+  font-size: 24px;
+  font-weight: bold;
+}
+.field {
+  border: 2px solid gray;
+}
+#login {
+  background-image: url("../images/bg.webp");
+  background-size: 100%;
+  background-position: 0px 80px;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+.status-container {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.status-container p {
+  margin-bottom: 5px;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+
+.btn {
+  margin-right: 10px;
+}
+/* Order Details Styling */
+.order-details {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.order-details .product-title {
+  font-weight: bold;
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.order-details .quantity,
+.order-details .price,
+.order-details .order-no,
+.order-details .order-date,
+.order-details .delivery-date {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.order-details .delivery-date {
+  color: #3c763d; /* Green color for delivery date */
+}
+.return-info {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.return-info::before {
+  content: "\2713"; /* Unicode checkmark symbol */
+  margin-right: 5px;
+  color: #28a745; /* Green color */
+  font-weight: bold;
+}
+
+.return-info::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/*  end Order Details Styling */
+
+/* start nav bar styling */
+.dropdown-menu {
+  display: none;
+}
+
+
+
+#hoverDropdown:hover .dropdown-menu {
+  display: block;
+}
+@media (max-width: 576px) {
+  .dropdown-menu {
+      margin-left: 0 !important;
+  }
+  .login{
+    border-radius: 20px;
+    width: 60px;
+    padding-left: 7px;
+    
+  }
+}
+@media (min-width: 576px) {
+  .dropdown-menu {
+      margin-left: -110px !important;
+  }
+  .login {
+      border-radius: 20px;
+      width: 60px;
+      padding-left: 7px;
+  }
+}
+@media (min-width: 992px) {
+  .dropdown-menu {
+      margin-left: -110px !important;
+  }
+  .login {
+    border-radius: 20px;
+    width: 60px;
+    padding-left: 7px;
+  }
+}
+@media (min-width: 1024px) {
+  .dropdown-menu {
+      margin-left: -70px !important;
+  }
+  .login {
+    border-radius: 20px;
+    width: 60px;
+    padding-left: 7px;
+  }
+}
+@media (max-width: 576px) {
+  .dropdown-menu {
+      margin-left: 0 !important;
+  }
+  .user{
+    border-radius: 50%;
+    width: 40px;
+    
+  }
+}
+@media (min-width: 576px) {
+  .dropdown-menu {
+      margin-left: -110px !important;
+  }
+  .user {
+      border-radius: 50%;
+      width: 40px;
+  }
+}
+@media (min-width: 992px) {
+  .dropdown-menu {
+      margin-left: -110px !important;
+  }
+  .user {
+      border-radius: 50%;
+      width: 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .dropdown-menu {
+      margin-left: -70px !important;
+  }
+  .user {
+      border-radius: 50%;
+      width: 40px;
+  }
+}
+@media (max-width: 576px){
+  .form{
+    width: 250px;
+    
+    margin-top: -40px;
+  }
+  .input{
+    width: 150px;
+    margin-left: 70px;
+  }
+}
+@media (max-width: 620px){
+  .form{
+    width: 300px;
+    
+    margin-top: -40px;
+  }
+  .input{
+    
+    margin-left: 70px;
+  }
+}
+ @media (max-width: 720px){
+  .form{
+    width: 250px;
+    
+    margin-top: -40px;
+  }
+  .input{
+    
+    margin-left: 70px;
+  }
+}
+@media (max-width: 990px){
+  .form{
+    width: 480px;
+    
+    margin-top: -40px;
+  }
+  .input{
+    
+    margin-left: 70px;
+  }
+} 
+
+
+.card-img-top {
+  transition: transform 0.3s ease;
+  /* Add transition effect for smooth zoom */
+}
+
+.card-img-top:hover {
+  transform: scale(1.1);
+  /* Zoom in on hover */
+}
+
+.image-zoom {
+  transition: transform 0.3s ease;
+  /* Add transition effect for smooth zoom */
+}
+
+.image-zoom:hover {
+  transform: scale(1.1);
+  /* Zoom in on hover */
+}
+.nav-link.dropdown-toggle::after {
+  display: none; /* Hide the arrow symbol */
+}
+
+.cart-count {
+  background-color: #dc3545; /* Red color */
+  color: white; /* White text color */
+  font-weight: bold;
+  padding: 4px 8px; /* Adjust padding as needed */
+  border-radius: 50%; /* Make it circular */
+  font-size: 12px; /* Adjust font size as needed */
+}
+/* end nav bar styling */

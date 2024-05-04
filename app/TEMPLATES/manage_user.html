@@ -1,0 +1,49 @@
+{% extends 'admin_dashboard.html' %}
+{% block body %}
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">All Registered Users</h5>
+        <div class="container">
+            <table class="table table-bordered table-sm shadow">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">SR No.</th>
+                        <th scope="col" class="text-center">First Name</th>
+                        <th scope="col" class="text-center">Last Name</th>
+                        <th scope="col" class="text-center">Username</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in users %}
+                    <tr>
+                        <td scope="col" class="text-center">{{ forloop.counter }}</td>
+                        <td scope="col" class="text-center">{{ i.first_name }}</td>
+                        <td scope="col" class="text-center">{{ i.last_name }}</td>
+                        <td scope="col" class="text-center">
+                            <!-- Open modal on username click -->
+                            <a href="#" data-toggle="modal" data-target="#profileModal{{ user.username }}">
+                                {{ i.username }}
+                            </a>
+                        </td>
+                        <td scope="col" class="text-center">
+                            <a href="/delete_user?id={{i.id}}" class="btn btn-danger"
+                                onclick="return confirm('Are You Sure?')">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

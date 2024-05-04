@@ -1,0 +1,73 @@
+{% extends 'admin_dashboard.html' %}
+{% block body %}
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">Edit Product</h5>
+        <div class="container-fluid">
+            <form action="update_product" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <input type="hidden" name="id" class="form-control" value="{{data.id}}">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Product Category</label>
+                            <select name="category" class="form-control" required>
+                                <option value="">Choose Category</option>
+                                {% for i in category %}
+                                <option value="{{i.0}}" {% if i.0 == data.category.0 %}selected{% endif %}>{{i.1}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Product Title</label>
+                            <input type="text" name="title" class="form-control" value="{{data.title}}" placeholder="Product Title">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Product Selling Price</label>
+                            <input type="text" name="sp" class="form-control" value="{{data.selling_price}}" placeholder="Product Price">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Discount</label>
+                            <input type="text" name="dp" class="form-control" value="{{data.dicounted_price}}" placeholder="Apply Discount">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Brand</label>
+                            <input type="text" name="brand" class="form-control" value="{{data.brand }}" placeholder="Apply Discount">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label>Product Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <img src="/media/{{data.images}}" style="width:100%;height:80px">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="desc" class="form-control" placeholder="write description here">{{data.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Update" class="m-2 px-3 btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
